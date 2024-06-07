@@ -1,1 +1,1 @@
-# computational-intelligence-archive
+# Computational Intelligence Archive
