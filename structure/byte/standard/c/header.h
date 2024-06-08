@@ -21,19 +21,22 @@ typedef struct __CIA_BYTE__
 
   /**
    * Retrive the data stored in the CIA_BYTE object.
+   * @param obj The CIA_BYTE object.
    * @return The data stored in the object.
    */
-  uint8_t (*get)(CIA_BYTE *obj);
+  uint8_t (*get)(const CIA_BYTE *obj);
 
   /**
    * Update the data stored in the CIA_BYTE object.
+   * @param obj The CIA_BYTE object.
    * @param data The new data to be stored in the object.
    * @return The status of the operation.
    */
-  enum CIA_STATUS (*set)(CIA_BYTE *obj, uint8_t data);
+  enum CIA_STATUS (*set)(CIA_BYTE *obj, const uint8_t data);
 
   /**
    * Free the memory allocated to the CIA_BYTE object.
+   * @param obj The CIA_BYTE object.
    * @return The status of the operation.
    */
   enum CIA_STATUS (*free)(CIA_BYTE *obj);
@@ -44,10 +47,11 @@ typedef struct __CIA_BYTE_CLASS__
 {
   /**
    * Create a new instance of CIA_BYTE object with the given data
+   * @param cls The class definition.
    * @param data The data to be stored in the object.
    * @return The newly created CIA_BYTE object.
    */
-  CIA_BYTE *(*new)(uint8_t data);
+  CIA_BYTE *(*new)(const __CIA_BYTE_CLASS *cls, const uint8_t data);
 } __CIA_BYTE_CLASS;
 
 // Global instance of CIA_BYTE_CLASS.

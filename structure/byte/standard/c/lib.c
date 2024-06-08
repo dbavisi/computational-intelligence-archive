@@ -13,7 +13,7 @@
  * @param obj The CIA_BYTE object.
  * @return The data stored in the object.
  */
-uint8_t __CIA_BYTE__get(CIA_BYTE *obj)
+uint8_t __CIA_BYTE__get(const CIA_BYTE *obj)
 {
   if (obj == NULL)
   {
@@ -28,7 +28,7 @@ uint8_t __CIA_BYTE__get(CIA_BYTE *obj)
  * @param data The new data to be stored in the object.
  * @return The status of the operation.
  */
-enum CIA_STATUS __CIA_BYTE__set(CIA_BYTE *obj, uint8_t data)
+enum CIA_STATUS __CIA_BYTE__set(CIA_BYTE *obj, const uint8_t data)
 {
   if (obj == NULL)
   {
@@ -55,10 +55,11 @@ enum CIA_STATUS __CIA_BYTE__free(CIA_BYTE *obj)
 
 /**
  * Create a new instance of CIA_BYTE object with the given data
+ * @param cls The class definition.
  * @param data The data to be stored in the object.
  * @return The newly created CIA_BYTE object.
  */
-CIA_BYTE *__CIA_BYTE_CLASS__new(uint8_t data)
+CIA_BYTE *__CIA_BYTE_CLASS__new(const __CIA_BYTE_CLASS *cls, const uint8_t data)
 {
   CIA_BYTE *obj = (CIA_BYTE *)malloc(sizeof(CIA_BYTE));
   if (obj == NULL)
