@@ -3,10 +3,10 @@
  * @author Dwij Bavisi <dwij@dbavisi.net>
  * Website: https://cia.dbavisi.net
  *
- * @header Library for STANDARD implementation of CIA_BYTEARRAY.
+ * Standard implementation of ByteArray data structure in C Programming Language.
  */
 
-#include "header.h"
+#include "structure/byteArray/definition/c/header.h"
 
 /**
  * Retrieve the data stored in the CIA_BYTEARRAY buffer.
@@ -18,7 +18,7 @@
  * @note start and end are inclusive.
  * @note The caller is responsible for freeing the memory allocated to the buffer.
  */
-uint8_t *__CIA_BYTEARRAY__get(const CIA_BYTEARRAY *obj, const size_t start, const size_t end)
+uint8_t *__CIA_BYTEARRAY__get(const CIA_BYTEARRAY *const obj, const size_t const start, const size_t const end)
 {
   if (obj == NULL)
   {
@@ -28,7 +28,7 @@ uint8_t *__CIA_BYTEARRAY__get(const CIA_BYTEARRAY *obj, const size_t start, cons
   {
     return NULL;
   }
-  uint8_t *buffer = (uint8_t *)malloc((end - start + 1) * sizeof(uint8_t));
+  uint8_t *const buffer = (uint8_t *)malloc((end - start + 1) * sizeof(uint8_t));
   if (buffer == NULL)
   {
     return NULL;
@@ -48,7 +48,7 @@ uint8_t *__CIA_BYTEARRAY__get(const CIA_BYTEARRAY *obj, const size_t start, cons
  * @param size The size of the buffer.
  * @return The status of the operation.
  */
-enum CIA_STATUS __CIA_BYTEARRAY__set(CIA_BYTEARRAY *obj, const size_t start, const uint8_t *data, const size_t size)
+enum CIA_STATUS __CIA_BYTEARRAY__set(CIA_BYTEARRAY *const obj, const size_t const start, const uint8_t *const data, const size_t size)
 {
   if (obj == NULL)
   {
@@ -70,7 +70,7 @@ enum CIA_STATUS __CIA_BYTEARRAY__set(CIA_BYTEARRAY *obj, const size_t start, con
  * @param obj The CIA_BYTEARRAY object.
  * @return The status of the operation.
  */
-enum CIA_STATUS __CIA_BYTEARRAY__free(CIA_BYTEARRAY *obj)
+enum CIA_STATUS __CIA_BYTEARRAY__free(CIA_BYTEARRAY *const obj)
 {
   if (obj == NULL)
   {
@@ -88,7 +88,7 @@ enum CIA_STATUS __CIA_BYTEARRAY__free(CIA_BYTEARRAY *obj)
  * @param end The end index of the view.
  * @return The view of the CIA_BYTEARRAY object.
  */
-CIA_BYTEARRAY *__CIA_BYTEARRAY__view(const CIA_BYTEARRAY *obj, const size_t start, const size_t end)
+CIA_BYTEARRAY *__CIA_BYTEARRAY__view(const CIA_BYTEARRAY *const obj, const size_t const start, const size_t const end)
 {
   if (obj == NULL)
   {
@@ -99,7 +99,7 @@ CIA_BYTEARRAY *__CIA_BYTEARRAY__view(const CIA_BYTEARRAY *obj, const size_t star
     return NULL;
   }
 
-  CIA_BYTEARRAY *view = CIA_BYTEARRAY_CLASS.new(&CIA_BYTEARRAY_CLASS, 0, NULL);
+  CIA_BYTEARRAY *const view = CIA_BYTEARRAY_CLASS.new(&CIA_BYTEARRAY_CLASS, 0, NULL);
   if (view == NULL)
   {
     return NULL;
@@ -118,9 +118,9 @@ CIA_BYTEARRAY *__CIA_BYTEARRAY__view(const CIA_BYTEARRAY *obj, const size_t star
  * @param [data] The data to be stored in the object.
  * @return The newly created CIA_BYTEARRAY object.
  */
-CIA_BYTEARRAY *__CIA_BYTEARRAY_CLASS__new(const __CIA_BYTEARRAY_CLASS *cls, const size_t size, const uint8_t *data)
+CIA_BYTEARRAY *__CIA_BYTEARRAY_CLASS__new(const __CIA_BYTEARRAY_CLASS *const cls, const size_t size, const uint8_t *const data)
 {
-  CIA_BYTEARRAY *obj = (CIA_BYTEARRAY *)malloc(sizeof(CIA_BYTEARRAY));
+  CIA_BYTEARRAY *const obj = (CIA_BYTEARRAY *)malloc(sizeof(CIA_BYTEARRAY));
   if (obj == NULL)
   {
     return NULL;
@@ -164,6 +164,6 @@ CIA_BYTEARRAY *__CIA_BYTEARRAY_CLASS__new(const __CIA_BYTEARRAY_CLASS *cls, cons
 }
 
 // Class instance for CIA_BYTEARRAY.
-const __CIA_BYTEARRAY_CLASS CIA_BYTEARRAY_CLASS = {
+const __CIA_BYTEARRAY_CLASS const CIA_BYTEARRAY_CLASS = {
     .new = __CIA_BYTEARRAY_CLASS__new,
 };

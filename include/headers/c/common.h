@@ -3,24 +3,23 @@
  * @author Dwij Bavisi <dwij@dbavisi.net>
  * Website: https://cia.dbavisi.net
  *
- * @header Common header file for C programming language.
+ * Header file for all C Programming Language implementations.
  */
 
 #ifndef CIA_INCLUDE_COMMON_H
 #define CIA_INCLUDE_COMMON_H
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 
-// Common status codes for CIA applications.
+// Status codes for the CIA library.
 enum CIA_STATUS
 {
   // Success status code.
-  CIA_SUCCESS = 0,
+  CIA_SUCCESS = EXIT_SUCCESS,
 
   // Failure status code.
-  CIA_FAILURE = 1,
+  CIA_FAILURE = EXIT_FAILURE,
 };
 
 #endif // CIA_INCLUDE_COMMON_H
