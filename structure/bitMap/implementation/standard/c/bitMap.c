@@ -160,7 +160,7 @@ void *__CIA_BITMAP_CLASS__new(const void *const cls, ...)
     return NULL;
   }
 
-  obj->free = __CIA_BITMAP_OBJECT__free;
+  ((CIA_OBJECT *)obj)->free = __CIA_BITMAP_OBJECT__free;
   obj->set_bit = __CIA_BITMAP_OBJECT__set_bit;
   obj->clear_bit = __CIA_BITMAP_OBJECT__clear_bit;
   obj->test_bit = __CIA_BITMAP_OBJECT__test_bit;
