@@ -101,7 +101,7 @@ void *__CIA_BYTEARRAY_CLASS__new(const void *const cls, ...)
   va_list args;
   va_start(args, cls);
   obj->length = va_arg(args, const size_t);
-  obj->isView = 0;
+  obj->isView = va_arg(args, const int);
   va_end(args);
 
   if (obj->length == 0)
@@ -118,7 +118,7 @@ void *__CIA_BYTEARRAY_CLASS__new(const void *const cls, ...)
     }
   }
 
-  obj->free = __CIA_BYTEARRAY_OBJECT__free;
+  ((CIA_OBJECT *)obj)->free = __CIA_BYTEARRAY_OBJECT__free;
   obj->get_byte = __CIA_BYTEARRAY_OBJECT__get_byte;
   obj->set_byte = __CIA_BYTEARRAY_OBJECT__set_byte;
   obj->get_range = __CIA_BYTEARRAY_OBJECT__get_range;
