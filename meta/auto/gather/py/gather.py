@@ -4,6 +4,7 @@
 #
 # Implementation of Metadata Gathering utility classes in Python Programming Language.
 
+from time import time, strftime, gmtime
 from include.py.codebase.codebase import Codebase, Structure
 
 class Gather:
@@ -13,6 +14,7 @@ class Gather:
   def gather_metadata(self):
     metadata = {}
     metadata['structure'] = self.gather_structure_metadata()
+    metadata['timestamp'] = strftime('%Y-%m-%d %H:%M:%S %z', gmtime(time()))
 
     return metadata
 

@@ -1,0 +1,36 @@
+name: Collect Metadata
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  collect-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Collect metadata
+        run: |
+          python meta/auto/driver.py
+
+      - name: Commit metadata
+        run: |
+          git config --global user.name 'Dwij Bavisi'
+          git config --global user.email 'dwij@dbavisi.net'
+          git add meta/raw/metadata.json
+          git commit -m "[AUTO] Update metadata"
+          git push
