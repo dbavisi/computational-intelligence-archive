@@ -20,14 +20,11 @@ class Directory:
     self._files = []
     self.refresh()
 
-    print(self.abspath, self._subdirs)
-
   def refresh(self):
     self._subdirs = []
     self._files = []
     for item in listdir(self.abspath):
-      print(item, path.isdir(item))
-      if path.isdir(item):
+      if path.isdir(path.join(self.abspath, item)):
         self._subdirs.append(item)
       else:
         self._files.append(item)
@@ -56,7 +53,6 @@ class Directory:
     if self.has_subdir(name):
       return self.subdir(name)
     newdir = path.join(self.abspath, name)
-    print(self._subdirs, self.name, self.abspath, newdir)
     mkdir(newdir)
     self._subdirs.append(name)
     return Directory(newdir)

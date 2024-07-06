@@ -1,3 +1,25 @@
 {
-  "structure": {}
+  "structure": {
+    "byte": {
+      "standard": {
+        "languages": [
+          "c"
+        ]
+      }
+    },
+    "byteArray": {
+      "standard": {
+        "languages": [
+          "c"
+        ]
+      }
+    },
+    "bitMap": {
+      "standard": {
+        "languages": [
+          "c"
+        ]
+      }
+    }
+  }
 }

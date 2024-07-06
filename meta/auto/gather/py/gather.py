@@ -4,7 +4,7 @@
 #
 # Implementation of Metadata Gathering utility classes in Python Programming Language.
 
-from include.py.codebase.codebase import Codebase
+from include.py.codebase.codebase import Codebase, Structure
 
 class Gather:
   def __init__(self, codebase: Codebase):
@@ -12,22 +12,23 @@ class Gather:
 
   def gather_metadata(self):
     metadata = {}
-    metadata['structure'] = self.gather_structure_metadata(self.codebase)
+    metadata['structure'] = self.gather_structure_metadata()
 
     return metadata
 
-  def gather_structure_metadata(self, root):
+  def gather_structure_metadata(self):
     metadata = {}
-    for structure in root.subdir('structure')._subdirs:
-      metadata[structure.name] = self.gather_structure_implementation_metadata(structure)
+    for structure in self.codebase.subdir('structure')._subdirs:
+      metadata[structure] = self.gather_structure_implementation_metadata(
+        self.codebase.structure(structure))
 
     return metadata
 
-  def gather_structure_implementation_metadata(self, structure):
+  def gather_structure_implementation_metadata(self, structure: Structure):
     metadata = {}
-    print(structure.subdir('implementation')._subdirs)
     for implementation in structure.subdir('implementation')._subdirs:
-      metadata[implementation.name] = self.gather_implementation_metadata(implementation)
+      metadata[implementation] = self.gather_implementation_metadata(
+        structure.subdir('implementation').subdir(implementation))
 
     return metadata
 
