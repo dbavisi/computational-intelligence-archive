@@ -1,0 +1,26 @@
+{
+  "structure": {
+    "byte": {
+      "standard": {
+        "languages": [
+          "c"
+        ]
+      }
+    },
+    "byteArray": {
+      "standard": {
+        "languages": [
+          "c"
+        ]
+      }
+    },
+    "bitMap": {
+      "standard": {
+        "languages": [
+          "c"
+        ]
+      }
+    }
+  },
+  "timestamp": "2024-07-06 22:24:54 +0000"
+}

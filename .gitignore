@@ -1,6 +1,9 @@
 .vscode/
 
 .build/
+
 *.o
 *.out
 *.a
+
+__pycache__/
