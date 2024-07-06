@@ -1,9 +1,9 @@
 name: Collect Metadata
 
+permissions:
+  contents: write
+
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '* * * * *'
 
@@ -32,5 +32,5 @@ jobs:
           git config --global user.name 'Dwij Bavisi'
           git config --global user.email 'dwij@dbavisi.net'
           git add meta/raw/metadata.json
-          git commit -m "[AUTO] Update metadata"
+          git commit -m "[AUTO] Update metadata [$(date +'%Y-%m-%d %H:%M:%S %z')]"
           git push
