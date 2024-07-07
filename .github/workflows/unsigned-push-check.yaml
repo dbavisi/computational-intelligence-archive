@@ -1,0 +1,40 @@
+name: Raise Issue for Unsigned Commits
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-unsigned-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+
+      - name: Check for unsigned commits
+        id: check_unsigned
+        run: |
+          unsigned_commits=$(git log ${GITHUB_SHA}^..${GITHUB_SHA} --pretty='%H %G?' | grep -E ' [N]$' || true)
+          echo "::set-output name=unsigned::$unsigned_commits"
+
+      - name: Raise issue if there are unsigned commits
+        if: steps.check_unsigned.outputs.unsigned != ''
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const unsignedCommits = `{{ steps.check_unsigned.outputs.unsigned }}`;
+            github.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Unsigned commits detected',
+              body: `The following commits are unsigned:\n\n${unsignedCommits}`,
+              labels: ['unsigned']
+            })
