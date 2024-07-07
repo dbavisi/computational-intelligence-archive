@@ -1,0 +1,42 @@
+name: Check for Unsigned Commits
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  check-unsigned-commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "Dwij Bavisi"
+          git config --global user.email "dwij@dbavisi.net"
+
+      - name: Check for unsigned commits
+        id: check_unsigned
+        run: |
+          unsigned_commits=$(git log --pretty='%H %G?' | grep -E ' [N]$' || true)
+          echo "::set-output name=unsigned::$unsigned_commits"
+
+      - name: Fail if there are unsigned commits
+        if: steps.check_unsigned.outputs.unsigned != ''
+        run: |
+          echo "Unsigned commits found: ${{ steps.check_unsigned.outputs.unsigned }}"
+          exit 1
+
+      - name: Label as bad
+        if: steps.check_unsigned.outputs.unsigned != ''
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['unsigned']
+            })
